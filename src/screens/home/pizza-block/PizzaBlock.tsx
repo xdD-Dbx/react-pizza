@@ -1,7 +1,14 @@
 import styles from './PizzaBlock.module.css'
 import { PlusSvg } from './PlusSvg'
 
-export function PizzaBlock() {
+type PizzaBlockType = {
+	pizzaCount: number
+	setPizzaCount: Function
+}
+
+export function PizzaBlock({ pizzaCount, setPizzaCount }: PizzaBlockType) {
+	const onClickAdd = () => setPizzaCount((prev: number) => prev + 1)
+
 	return (
 		<div className={styles.pizzaBlock}>
 			<img
@@ -23,10 +30,13 @@ export function PizzaBlock() {
 			</div>
 			<div className={styles.bottom}>
 				<div className={styles.price}>от 395 ₽</div>
-				<div className='button button--outline button--add'>
+				<div
+					className='button button--outline button--add'
+					onClick={onClickAdd}
+				>
 					<PlusSvg />
 					<span>Добавить</span>
-					<i>2</i>
+					<i>{pizzaCount}</i>
 				</div>
 			</div>
 		</div>
