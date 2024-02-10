@@ -1,15 +1,25 @@
+import { useState } from 'react'
 import styles from './Categories.module.css'
 
+const categories = [
+	'Все',
+	'Мясные',
+	'Вегетарианская',
+	'Гриль',
+	'Острые',
+	'Закрытые',
+]
+
 export function Categories() {
+	const [isActive, setIsActive] = useState(categories[0])
+
 	return (
 		<div className={styles.categories}>
 			<ul>
-				<li className={styles.active}>Все</li>
-				<li>Мясные</li>
-				<li>Вегетарианская</li>
-				<li>Гриль</li>
-				<li>Острые</li>
-				<li>Закрытые</li>
+				{categories.map((item) => (
+					<li className={item === isActive ? styles.active : ''}
+					onClick={() => setIsActive(item)}>{item}</li>
+				))}
 			</ul>
 		</div>
 	)

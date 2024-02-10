@@ -1,21 +1,36 @@
+import { useState } from 'react'
 import { ArrowSvg } from './ArrowSvg'
 import styles from './Sort.module.css'
 
+const sortList = ['популярности', 'цене', 'алфавиту']
+
 export function Sort() {
+	const [isOpened, setIsOpened] = useState(false)
+	const [sortState, setSortState] = useState(sortList[0])
+
 	return (
 		<div className={styles.sort}>
 			<div className={styles.sort__label}>
 				<ArrowSvg />
 				<b>Сортировка по:</b>
-				<span>популярности</span>
+				<span onClick={() => setIsOpened(!isOpened)}>популярности</span>
 			</div>
-			<div className={styles.sort__popup}>
-				<ul>
-					<li className={styles.active}>популярности</li>
-					<li>цене</li>
-					<li>алфавиту</li>
-				</ul>
-			</div>
+			{isOpened ? (
+				<div className={styles.sort__popup}>
+					<ul>
+						{sortList.map((item) => (
+							<li
+								className={sortState === item ? styles.active : ''}
+								onClick={() => setSortState(item)}
+							>
+								{item}
+							</li>
+						))}
+					</ul>
+				</div>
+			) : (
+				''
+			)}
 		</div>
 	)
 }

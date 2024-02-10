@@ -1,38 +1,59 @@
+import { useState } from 'react'
 import styles from './PizzaBlock.module.css'
 import { PlusSvg } from './PlusSvg'
 
 type PizzaBlockType = {
-	pizzaCount: number
-	setPizzaCount: Function
+	id: number
+	imageUrl: string
+	title: string
+	price: number
+	types: Array<number>
+	sizes: Array<number>
 }
 
-export function PizzaBlock({ pizzaCount, setPizzaCount }: PizzaBlockType) {
-	const onClickAdd = () => setPizzaCount((prev: number) => prev + 1)
+export function PizzaBlock({
+	id,
+	imageUrl,
+	title,
+	types,
+	sizes,
+	price,
+}: PizzaBlockType) {
+	const [pizzaCount, setPizzaCount] = useState(0)
+	const [pizzaType, setPizzaType] = useState(types[0])
+	const [pizzaSize, setPizzaSize] = useState(sizes[0])
 
 	return (
 		<div className={styles.pizzaBlock}>
-			<img
-				className={styles.image}
-				src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-				alt='Pizza'
-			/>
-			<h4 className={styles.title}>Чизбургер-пицца</h4>
+			<img className={styles.image} src={imageUrl} alt='Pizza' />
+			<h4 className={styles.title}>{title}</h4>
 			<div className={styles.selector}>
 				<ul>
-					<li className={styles.active}>тонкое</li>
-					<li>традиционное</li>
+					{types.map((type) => (
+						<li
+							className={type === pizzaType ? styles.active : ''}
+							onClick={() => setPizzaType(type)}
+						>
+							{type === 0 ? 'тонкое' : 'традиционное'}
+						</li>
+					))}
 				</ul>
 				<ul>
-					<li className={styles.active}>26 см.</li>
-					<li>30 см.</li>
-					<li>40 см.</li>
+					{sizes.map((size) => (
+						<li
+							className={pizzaSize === size ? styles.active : ''}
+							onClick={() => setPizzaSize(size)}
+						>
+							{size} см.
+						</li>
+					))}
 				</ul>
 			</div>
 			<div className={styles.bottom}>
-				<div className={styles.price}>от 395 ₽</div>
+				<div className={styles.price}>от {price} ₽</div>
 				<div
 					className='button button--outline button--add'
-					onClick={onClickAdd}
+					onClick={() => setPizzaCount((prev: number) => prev + 1)}
 				>
 					<PlusSvg />
 					<span>Добавить</span>
