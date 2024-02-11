@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import pizzaLogo from '../../assets/img/pizza-logo.svg'
 import { CartSvg } from './CartSvg'
 import styles from './Header.module.css'
@@ -14,12 +15,12 @@ export function Header() {
 					</div>
 				</div>
 				<div className={styles.cart}>
-					<a href='/cart.html' className='button button--cart'>
+					<Link to='/cart' className='button button--cart'>
 						<span>520 ₽</span>
 						<div className='button__delimiter'></div>
 						<CartSvg />
 						<span>3</span>
-					</a>
+					</Link>
 				</div>
 			</div>
 		</header>
