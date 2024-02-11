@@ -17,7 +17,7 @@ export function Categories() {
 		<div className={styles.categories}>
 			<ul>
 				{categories.map((item) => (
-					<li className={item === isActive ? styles.active : ''}
+					<li key={item} className={item === isActive ? styles.active : ''}
 					onClick={() => setIsActive(item)}>{item}</li>
 				))}
 			</ul>

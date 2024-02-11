@@ -31,6 +31,7 @@ export function PizzaBlock({
 				<ul>
 					{types.map((type) => (
 						<li
+							key={type}
 							className={type === pizzaType ? styles.active : ''}
 							onClick={() => setPizzaType(type)}
 						>
@@ -41,6 +42,7 @@ export function PizzaBlock({
 				<ul>
 					{sizes.map((size) => (
 						<li
+							key={size}
 							className={pizzaSize === size ? styles.active : ''}
 							onClick={() => setPizzaSize(size)}
 						>
